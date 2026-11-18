@@ -124,7 +124,7 @@ def test_get_task_by_id(client):
 # --- Exercice 1 : supprimer une tâche ---
 
 def test_delete_task(client):
-    # ARRANGE : faire un get pour récupérer la tâche à supprimer
+    # ARRANGE : créer une tâche et récupérer son id
     create_response = client.post("/tasks", json={"title": "Supprime-moi"})
     task_id = create_response.json()["id"]
     
@@ -211,10 +211,8 @@ def test_update_nonexistent_task(client):
 
 def test_create_task_with_empty_title(client):
     """Créer une tâche avec un titre vide ("") est refusé : 422."""
-    # ARRANGE :
+    # ARRANGE/ACT :
     create_response = client.post("/tasks", json={"title": ""})
-
-    # ACT :
 
     # ASSERT :
     assert create_response.status_code == 422
@@ -256,12 +254,14 @@ def test_update_task_with_invalid_priority(client):
 def test_filter_tasks_by_status(client):
     """Créez une tâche "todo" et une tâche "done" : GET /tasks?status=done
     ne renvoie qu'une seule tâche, celle qui est terminée."""
-
+    # ARRANGE :
     create_response1 = client.post("/tasks", json={"title": "titre", "status": "todo"})
     create_response2 = client.post("/tasks", json={"title": "titre2", "status": "done"})
-    
+
+    # ACT :
     get_response = client.get(f"/tasks?status=done")
 
+    # ASSERT :
     assert get_response.status_code == 200
     tasks = get_response.json()
     assert len(tasks) == 1
