@@ -33,3 +33,4 @@ Le rapport de couverture HTML est généré dans `htmlcov/index.html`.
 | `pyproject.toml` | Dépendances et configuration de pytest |
 
 Les consignes sont dans les TP : `docs/TP-1.md`, `docs/TP-2.md`, `docs/TP-3.md`.
+# Test PR
