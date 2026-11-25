@@ -22,17 +22,17 @@ jobs:
           cache: 'pip'
 
       # TODO : Installez UV avec pip
-      - name: Installer UV
+      - name: Install UV
         run: pip install uv
 
       # TODO : Installez les dépendances (cd backend && uv sync)
-      - name: Installer les dépendances
+      - name: Install dependencies
         run: |
           cd backend
           uv sync
 
       # TODO : Lancez les tests
-      - name: Lancemement des tests
+      - name: Run tests
         run: |
           cd backend
           uv run pytest -v --cov
